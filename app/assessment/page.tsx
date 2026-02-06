@@ -5,10 +5,10 @@
  * Two-column form for collecting patient data and symptoms
  */
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { FaHeartbeat, FaSpinner } from 'react-icons/fa'
+import { FaHeartbeat, FaSpinner, FaClock } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -41,6 +41,7 @@ export default function AssessmentPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [retryCountdown, setRetryCountdown] = useState<number>(0)
   const [formData, setFormData] = useState<FormData>({
     age: '',
     gender: '',
@@ -56,9 +57,18 @@ export default function AssessmentPage() {
     },
   })
 
+  // Countdown timer effect
+  useEffect(() => {
+    if (retryCountdown > 0) {
+      const timer = setTimeout(() => setRetryCountdown(retryCountdown - 1), 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [retryCountdown])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
+    setRetryCountdown(0)
 
     // Validation
     if (!formData.age || !formData.gender || !formData.symptoms || !formData.duration) {
@@ -99,6 +109,7 @@ Please analyze these symptoms and provide a triage assessment.`
         // Handle specific error types
         if (result.error?.includes('rate limit') || result.error?.includes('429')) {
           setError('Our system is experiencing high demand. Please wait a moment and try again.')
+          setRetryCountdown(60) // Start 60-second countdown
         } else {
           setError(result.error || 'Failed to analyze symptoms. Please try again.')
         }
@@ -317,10 +328,24 @@ Please analyze these symptoms and provide a triage assessment.`
                     </div>
                     <div className="flex-1">
                       <p className="text-red-700 font-medium">{error}</p>
-                      {error.includes('high demand') && (
-                        <p className="text-red-600 text-sm mt-1">
-                          The system will automatically retry. If this persists, please wait 30 seconds and submit again.
-                        </p>
+                      {(error.includes('high demand') || error.includes('rate limit')) && (
+                        <div className="mt-2">
+                          <p className="text-red-600 text-sm">
+                            The system automatically retried 5 times.
+                          </p>
+                          {retryCountdown > 0 ? (
+                            <div className="flex items-center gap-2 mt-2">
+                              <FaClock className="text-[#0077B6]" />
+                              <p className="text-sm text-gray-700">
+                                Please wait <span className="font-bold text-[#0077B6]">{retryCountdown}</span> seconds before retrying
+                              </p>
+                            </div>
+                          ) : (
+                            <p className="text-green-600 text-sm mt-2 font-medium">
+                              You can now retry your submission
+                            </p>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -331,13 +356,18 @@ Please analyze these symptoms and provide a triage assessment.`
               <div className="flex gap-4">
                 <Button
                   type="submit"
-                  disabled={loading}
-                  className="flex-1 bg-[#0077B6] hover:bg-[#005F8D] text-white py-6 text-lg"
+                  disabled={loading || retryCountdown > 0}
+                  className="flex-1 bg-[#0077B6] hover:bg-[#005F8D] text-white py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <>
                       <FaSpinner className="animate-spin mr-2" />
                       Analyzing Symptoms...
+                    </>
+                  ) : retryCountdown > 0 ? (
+                    <>
+                      <FaClock className="mr-2" />
+                      Wait {retryCountdown}s to Retry
                     </>
                   ) : (
                     'Analyze Symptoms'

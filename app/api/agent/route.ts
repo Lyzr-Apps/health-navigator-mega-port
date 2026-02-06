@@ -149,46 +149,59 @@ export async function POST(request: NextRequest) {
     // Retry logic for rate limiting (429 errors)
     let response: Response
     let rawText: string
-    let retries = 3
-    let delay = 1000 // Start with 1 second
+    let maxRetries = 5
+    let currentAttempt = 0
+    let delay = 2000 // Start with 2 seconds
 
-    while (retries > 0) {
-      response = await fetch(LYZR_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': LYZR_API_KEY,
-        },
-        body: JSON.stringify(payload),
-      })
-
-      rawText = await response.text()
-
-      // If not rate limited, break out of retry loop
-      if (response.status !== 429) {
-        break
-      }
-
-      // If rate limited and retries remain, wait and retry
-      if (retries > 1) {
-        await new Promise((resolve) => setTimeout(resolve, delay))
-        delay *= 2 // Exponential backoff
-        retries--
-      } else {
-        // Last retry failed, return error
-        return NextResponse.json(
-          {
-            success: false,
-            response: {
-              status: 'error',
-              result: {},
-              message: 'API rate limit exceeded. Please try again in a few moments.',
-            },
-            error: 'Rate limit exceeded after retries',
-            details: rawText,
+    while (currentAttempt <= maxRetries) {
+      try {
+        response = await fetch(LYZR_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': LYZR_API_KEY,
           },
-          { status: 429 }
-        )
+          body: JSON.stringify(payload),
+        })
+
+        rawText = await response.text()
+
+        // If successful or non-rate-limit error, break out of retry loop
+        if (response.status !== 429) {
+          break
+        }
+
+        // If rate limited and retries remain, wait and retry
+        if (currentAttempt < maxRetries) {
+          console.log(`Rate limited (429), retrying in ${delay}ms... (attempt ${currentAttempt + 1}/${maxRetries})`)
+          await new Promise((resolve) => setTimeout(resolve, delay))
+          delay = Math.min(delay * 1.5, 10000) // Exponential backoff, max 10 seconds
+          currentAttempt++
+        } else {
+          // Last retry failed, return error
+          return NextResponse.json(
+            {
+              success: false,
+              response: {
+                status: 'error',
+                result: {},
+                message: 'Service is currently experiencing high demand. Please wait 60 seconds and try again.',
+              },
+              error: 'Rate limit exceeded after multiple retries',
+              details: `Attempted ${maxRetries + 1} times. Please try again later.`,
+            },
+            { status: 429 }
+          )
+        }
+      } catch (fetchError) {
+        // Network error during retry
+        if (currentAttempt < maxRetries) {
+          await new Promise((resolve) => setTimeout(resolve, delay))
+          delay = Math.min(delay * 1.5, 10000)
+          currentAttempt++
+        } else {
+          throw fetchError
+        }
       }
     }
 
