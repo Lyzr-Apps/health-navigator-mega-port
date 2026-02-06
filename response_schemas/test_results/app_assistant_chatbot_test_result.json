@@ -1,0 +1,29 @@
+{
+  "agent_name": "App Assistant Chatbot",
+  "agent_id": "69859914e17e33c11eed1ab6",
+  "test_message": "How do I book a video consultation with a doctor?",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T07:35:29.227905",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "intent": "navigation",
+      "response_text": "To book a video consultation with a doctor, please follow these steps:\n\n1. Go to the 'Book Appointment' section in the app.\n2. Select 'Video Consultation' as your preferred appointment type.\n3. Choose the doctor you want to consult or let the app suggest one for you.\n4. Pick your preferred date and time slot.\n5. Confirm your booking and check your upcoming appointments for the meeting link.\n\nWould you like to go directly to the booking page?",
+      "action_type": "navigate",
+      "redirect_url": "app://appointments/book/video",
+      "suggested_actions": [
+        "Go to video consultation booking",
+        "View upcoming appointments",
+        "Learn more about video consultations"
+      ],
+      "requires_triage": false
+    },
+    "metadata": {
+      "agent_name": "App Assistant Chatbot",
+      "timestamp": "2024-06-14T18:09:20Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"intent\": \"navigation\",\n    \"response_text\": \"To book a video consultation with a doctor, please follow these steps:\\n\\n1. Go to the 'Book Appointment' section in the app.\\n2. Select 'Video Consultation' as your preferred appointment type.\\n3. Choose the doctor you want to consult or let the app suggest one for you.\\n4. Pick your preferred date and time slot.\\n5. Confirm your booking and check your upcoming appointments for the meeting link.\\n\\nWould you like to go directly to the booking page?\",\n    \"action_type\": \"navigate\",\n    \"redirect_url\": \"app://appointments/book/video\",\n    \"suggested_actions\": [\n      \"Go to video consultation booking\",\n      \"View upcoming appointments\",\n      \"Learn more about video consultations\"\n    ],\n    \"requires_triage\": false\n  },\n  \"metadata\": {\n    \"agent_name\": \"App Assistant Chatbot\",\n    \"timestamp\": \"2024-06-14T18:09:20Z\"\n  }\n}"
+}

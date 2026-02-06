@@ -1,0 +1,33 @@
+{
+  "agent_name": "Red Flag Detection Agent",
+  "agent_id": "6985986be17e33c11eed1aad",
+  "test_message": "Symptoms: sudden severe headache, chest pain with left arm numbness, difficulty breathing, profuse sweating",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T07:35:04.292579",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "red_flags_detected": [
+        "sudden severe headache",
+        "chest pain with left arm numbness",
+        "difficulty breathing",
+        "profuse sweating"
+      ],
+      "critical_patterns": [
+        "Cardiovascular: chest pain + sweating",
+        "Cardiovascular: chest pain + shortness of breath",
+        "Neurological: sudden severe headache"
+      ],
+      "urgency_override": "HIGH",
+      "requires_immediate_attention": true,
+      "emergency_recommendation": "Multiple life-threatening symptom patterns detected. Seek emergency medical attention immediately. Call emergency services or go to the nearest emergency department without delay."
+    },
+    "metadata": {
+      "agent_name": "Red Flag Detection Agent",
+      "timestamp": "2024-06-16T06:54:16Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"red_flags_detected\": [\n      \"sudden severe headache\",\n      \"chest pain with left arm numbness\",\n      \"difficulty breathing\",\n      \"profuse sweating\"\n    ],\n    \"critical_patterns\": [\n      \"Cardiovascular: chest pain + sweating\",\n      \"Cardiovascular: chest pain + shortness of breath\",\n      \"Neurological: sudden severe headache\"\n    ],\n    \"urgency_override\": \"HIGH\",\n    \"requires_immediate_attention\": true,\n    \"emergency_recommendation\": \"Multiple life-threatening symptom patterns detected. Seek emergency medical attention immediately. Call emergency services or go to the nearest emergency department without delay.\"\n  },\n  \"metadata\": {\n    \"agent_name\": \"Red Flag Detection Agent\",\n    \"timestamp\": \"2024-06-16T06:54:16Z\"\n  }\n}"
+}

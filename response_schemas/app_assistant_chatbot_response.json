@@ -1,0 +1,65 @@
+{
+  "agent_name": "App Assistant Chatbot",
+  "agent_id": "69859914e17e33c11eed1ab6",
+  "agent_purpose": "app_assistant",
+  "description": "Handles app navigation and redirects medical queries to triage",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "intent": "string",
+      "response_text": "string",
+      "action_type": "string",
+      "redirect_url": "string",
+      "suggested_actions": [
+        "string"
+      ],
+      "requires_triage": "boolean"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "intent": "navigation",
+      "response_text": "To book a video consultation with a doctor, please follow these steps:\n\n1. Go to the 'Book Appointment' section in the app.\n2. Select 'Video Consultation' as your preferred appointment type.\n3. Choose the doctor you want to consult or let the app suggest one for you.\n4. Pick your preferred date and time slot.\n5. Confirm your booking and check your upcoming appointments for the meeting link.\n\nWould you like to go directly to the booking page?",
+      "action_type": "navigate",
+      "redirect_url": "app://appointments/book/video",
+      "suggested_actions": [
+        "Go to video consultation booking",
+        "View upcoming appointments",
+        "Learn more about video consultations"
+      ],
+      "requires_triage": false
+    },
+    "metadata": {
+      "agent_name": "App Assistant Chatbot",
+      "timestamp": "2024-06-14T18:09:20Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T07:35:29.228533",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "intent": "navigation",
+      "response_text": "To book a video consultation with a doctor, please follow these steps:\n\n1. Go to the 'Book Appointment' section in the app.\n2. Select 'Video Consultation' as your preferred appointment type.\n3. Choose the doctor you want to consult or let the app suggest one for you.\n4. Pick your preferred date and time slot.\n5. Confirm your booking and check your upcoming appointments for the meeting link.\n\nWould you like to go directly to the booking page?",
+      "action_type": "navigate",
+      "redirect_url": "app://appointments/book/video",
+      "suggested_actions": [
+        "Go to video consultation booking",
+        "View upcoming appointments",
+        "Learn more about video consultations"
+      ],
+      "requires_triage": false
+    },
+    "metadata": {
+      "agent_name": "App Assistant Chatbot",
+      "timestamp": "2024-06-14T18:09:20Z"
+    }
+  },
+  "test_passed": true
+}

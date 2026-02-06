@@ -1,0 +1,94 @@
+{
+  "agent_name": "Action Planning Agent",
+  "agent_id": "69859894fe576c19864be913",
+  "agent_purpose": "action_planning",
+  "description": "Generates action plans and recommendations based on urgency levels",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "urgency_level": "string",
+      "primary_action": "string",
+      "recommended_actions": [
+        "string"
+      ],
+      "self_care_tips": [
+        "string"
+      ],
+      "escalation_criteria": [
+        "string"
+      ],
+      "show_map": "boolean",
+      "show_video_consult": "boolean",
+      "emergency_alert": "boolean",
+      "disclaimer": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "urgency_level": "High",
+      "primary_action": "IMMEDIATE ACTION REQUIRED: Call emergency services (911) or go to the nearest emergency room immediately.",
+      "recommended_actions": [
+        "Do not attempt to drive yourself if symptoms are severe; call for an ambulance.",
+        "Stop any physical activity and rest in a comfortable position.",
+        "Have someone stay with you until emergency help arrives."
+      ],
+      "self_care_tips": [
+        "Stay calm and breathe slowly to avoid further strain on your heart.",
+        "If prescribed, chew and swallow an aspirin (unless allergic or advised otherwise by your doctor).",
+        "Keep your phone with you to communicate with emergency responders."
+      ],
+      "escalation_criteria": [
+        "Sudden worsening chest pain or pressure.",
+        "Shortness of breath, fainting, or severe weakness.",
+        "New confusion or loss of consciousness."
+      ],
+      "show_map": true,
+      "show_video_consult": false,
+      "emergency_alert": true,
+      "disclaimer": "This is not a substitute for professional medical advice. If you feel your condition is worsening, seek immediate medical attention."
+    },
+    "metadata": {
+      "agent_name": "Action Planning Agent",
+      "timestamp": "2024-07-09T13:57:44Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T07:35:10.798559",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "urgency_level": "High",
+      "primary_action": "IMMEDIATE ACTION REQUIRED: Call emergency services (911) or go to the nearest emergency room immediately.",
+      "recommended_actions": [
+        "Do not attempt to drive yourself if symptoms are severe; call for an ambulance.",
+        "Stop any physical activity and rest in a comfortable position.",
+        "Have someone stay with you until emergency help arrives."
+      ],
+      "self_care_tips": [
+        "Stay calm and breathe slowly to avoid further strain on your heart.",
+        "If prescribed, chew and swallow an aspirin (unless allergic or advised otherwise by your doctor).",
+        "Keep your phone with you to communicate with emergency responders."
+      ],
+      "escalation_criteria": [
+        "Sudden worsening chest pain or pressure.",
+        "Shortness of breath, fainting, or severe weakness.",
+        "New confusion or loss of consciousness."
+      ],
+      "show_map": true,
+      "show_video_consult": false,
+      "emergency_alert": true,
+      "disclaimer": "This is not a substitute for professional medical advice. If you feel your condition is worsening, seek immediate medical attention."
+    },
+    "metadata": {
+      "agent_name": "Action Planning Agent",
+      "timestamp": "2024-07-09T13:57:44Z"
+    }
+  },
+  "test_passed": true
+}

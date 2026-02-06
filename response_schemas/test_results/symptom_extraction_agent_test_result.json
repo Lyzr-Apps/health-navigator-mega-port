@@ -1,0 +1,50 @@
+{
+  "agent_name": "Symptom Extraction Agent",
+  "agent_id": "69859858f7f7d3ffa5d86586",
+  "test_message": "I have a headache that started 2 days ago, with nausea and sensitivity to light. Pain is around 7/10.",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T07:34:48.947374",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "symptoms": [
+        {
+          "name": "headache",
+          "category": "pain",
+          "body_system": "nervous",
+          "severity": "severe",
+          "onset": "sudden",
+          "duration": "2 days"
+        },
+        {
+          "name": "nausea",
+          "category": "gastrointestinal",
+          "body_system": "digestive",
+          "severity": "moderate",
+          "onset": "sudden",
+          "duration": "2 days"
+        },
+        {
+          "name": "sensitivity to light",
+          "category": "neurological",
+          "body_system": "nervous",
+          "severity": "moderate",
+          "onset": "sudden",
+          "duration": "2 days"
+        }
+      ],
+      "primary_complaint": "headache",
+      "associated_symptoms": [
+        "nausea",
+        "sensitivity to light"
+      ]
+    },
+    "metadata": {
+      "agent_name": "Symptom Extraction Agent",
+      "timestamp": "2024-06-09T08:41:00Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"symptoms\": [\n      {\n        \"name\": \"headache\",\n        \"category\": \"pain\",\n        \"body_system\": \"nervous\",\n        \"severity\": \"severe\",\n        \"onset\": \"sudden\",\n        \"duration\": \"2 days\"\n      },\n      {\n        \"name\": \"nausea\",\n        \"category\": \"gastrointestinal\",\n        \"body_system\": \"digestive\",\n        \"severity\": \"moderate\",\n        \"onset\": \"sudden\",\n        \"duration\": \"2 days\"\n      },\n      {\n        \"name\": \"sensitivity to light\",\n        \"category\": \"neurological\",\n        \"body_system\": \"nervous\",\n        \"severity\": \"moderate\",\n        \"onset\": \"sudden\",\n        \"duration\": \"2 days\"\n      }\n    ],\n    \"primary_complaint\": \"headache\",\n    \"associated_symptoms\": [\"nausea\", \"sensitivity to light\"]\n  },\n  \"metadata\": {\n    \"agent_name\": \"Symptom Extraction Agent\",\n    \"timestamp\": \"2024-06-09T08:41:00Z\"\n  }\n}"
+}

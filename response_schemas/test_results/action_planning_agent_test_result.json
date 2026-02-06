@@ -1,0 +1,40 @@
+{
+  "agent_name": "Action Planning Agent",
+  "agent_id": "69859894fe576c19864be913",
+  "test_message": "Urgency: HIGH, Red Flags: chest pain + sweating, Risk Score: 85, Patient: 45-year-old with diabetes",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T07:35:10.798043",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "urgency_level": "High",
+      "primary_action": "IMMEDIATE ACTION REQUIRED: Call emergency services (911) or go to the nearest emergency room immediately.",
+      "recommended_actions": [
+        "Do not attempt to drive yourself if symptoms are severe; call for an ambulance.",
+        "Stop any physical activity and rest in a comfortable position.",
+        "Have someone stay with you until emergency help arrives."
+      ],
+      "self_care_tips": [
+        "Stay calm and breathe slowly to avoid further strain on your heart.",
+        "If prescribed, chew and swallow an aspirin (unless allergic or advised otherwise by your doctor).",
+        "Keep your phone with you to communicate with emergency responders."
+      ],
+      "escalation_criteria": [
+        "Sudden worsening chest pain or pressure.",
+        "Shortness of breath, fainting, or severe weakness.",
+        "New confusion or loss of consciousness."
+      ],
+      "show_map": true,
+      "show_video_consult": false,
+      "emergency_alert": true,
+      "disclaimer": "This is not a substitute for professional medical advice. If you feel your condition is worsening, seek immediate medical attention."
+    },
+    "metadata": {
+      "agent_name": "Action Planning Agent",
+      "timestamp": "2024-07-09T13:57:44Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"urgency_level\": \"High\",\n    \"primary_action\": \"IMMEDIATE ACTION REQUIRED: Call emergency services (911) or go to the nearest emergency room immediately.\",\n    \"recommended_actions\": [\n      \"Do not attempt to drive yourself if symptoms are severe; call for an ambulance.\",\n      \"Stop any physical activity and rest in a comfortable position.\",\n      \"Have someone stay with you until emergency help arrives.\"\n    ],\n    \"self_care_tips\": [\n      \"Stay calm and breathe slowly to avoid further strain on your heart.\",\n      \"If prescribed, chew and swallow an aspirin (unless allergic or advised otherwise by your doctor).\",\n      \"Keep your phone with you to communicate with emergency responders.\"\n    ],\n    \"escalation_criteria\": [\n      \"Sudden worsening chest pain or pressure.\",\n      \"Shortness of breath, fainting, or severe weakness.\",\n      \"New confusion or loss of consciousness.\"\n    ],\n    \"show_map\": true,\n    \"show_video_consult\": false,\n    \"emergency_alert\": true,\n    \"disclaimer\": \"This is not a substitute for professional medical advice. If you feel your condition is worsening, seek immediate medical attention.\"\n  },\n  \"metadata\": {\n    \"agent_name\": \"Action Planning Agent\",\n    \"timestamp\": \"2024-07-09T13:57:44Z\"\n  }\n}"
+}

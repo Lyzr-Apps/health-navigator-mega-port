@@ -1,0 +1,54 @@
+{
+  "workflow_created": true,
+  "agents_created": true,
+  "total_agents": 8,
+  "agent_ids": {
+    "triage_coordinator_manager": "698598b0a791e6e318b8df94",
+    "symptom_extraction_agent": "69859858f7f7d3ffa5d86586",
+    "red_flag_detection_agent": "6985986be17e33c11eed1aad",
+    "risk_scoring_agent": "69859880fe576c19864be912",
+    "action_planning_agent": "69859894fe576c19864be913",
+    "location_routing_agent": "698598e3fe576c19864be921",
+    "video_escalation_agent": "698598fa1caa4e686dd66f97",
+    "app_assistant_chatbot": "69859914e17e33c11eed1ab6"
+  },
+  "manager_agent": {
+    "agent_id": "698598b0a791e6e318b8df94",
+    "name": "Triage Coordinator Manager",
+    "managed_sub_agents": [
+      "69859858f7f7d3ffa5d86586",
+      "6985986be17e33c11eed1aad",
+      "69859880fe576c19864be912",
+      "69859894fe576c19864be913"
+    ]
+  },
+  "independent_agents": [
+    {
+      "agent_id": "698598e3fe576c19864be921",
+      "name": "Location & Routing Agent",
+      "trigger": "View Map on Risk Result Page"
+    },
+    {
+      "agent_id": "698598fa1caa4e686dd66f97",
+      "name": "Video Escalation Agent",
+      "trigger": "Request Consultation on Risk Result Page"
+    },
+    {
+      "agent_id": "69859914e17e33c11eed1ab6",
+      "name": "App Assistant Chatbot",
+      "trigger": "Chat widget on all pages"
+    }
+  ],
+  "response_schemas": {
+    "triage_coordinator_manager": "/app/nextjs-project/response_schemas/triage_coordinator_manager_response.json",
+    "symptom_extraction_agent": "/app/nextjs-project/response_schemas/symptom_extraction_agent_response.json",
+    "red_flag_detection_agent": "/app/nextjs-project/response_schemas/red_flag_detection_agent_response.json",
+    "risk_scoring_agent": "/app/nextjs-project/response_schemas/risk_scoring_agent_response.json",
+    "action_planning_agent": "/app/nextjs-project/response_schemas/action_planning_agent_response.json",
+    "location_routing_agent": "/app/nextjs-project/response_schemas/location_routing_agent_response.json",
+    "video_escalation_agent": "/app/nextjs-project/response_schemas/video_escalation_agent_response.json",
+    "app_assistant_chatbot": "/app/nextjs-project/response_schemas/app_assistant_chatbot_response.json"
+  },
+  "created_at": "2026-02-06T00:00:00.000Z",
+  "status": "complete"
+}

@@ -1,0 +1,52 @@
+{
+  "agent_name": "Location & Routing Agent",
+  "agent_id": "698598e3fe576c19864be921",
+  "test_message": "User location: San Francisco, CA 94102. Find nearest emergency hospital with cardiac care.",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T07:35:19.449008",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "nearest_facility": {
+        "name": "Zuckerberg San Francisco General Hospital and Trauma Center",
+        "address": "1001 Potrero Ave, San Francisco, CA 94110",
+        "phone": "(628) 206-8000",
+        "latitude": 37.7557,
+        "longitude": -122.4044,
+        "facility_type": "Emergency Room"
+      },
+      "route": {
+        "distance_miles": 2.3,
+        "eta_minutes": 10,
+        "traffic_status": "moderate",
+        "polyline": "svmzFpphjVn@_FpAiEvDqBtBkBzB{@pHiElJkGxJcF`Be@b@eBbEgDnAq@vDoAbG_A`I",
+        "directions": [
+          "Head southeast on Van Ness Ave toward Grove St",
+          "Turn left onto Grove St",
+          "Turn right onto 10th St",
+          "Continue onto Potrero Ave",
+          "Arrive at 1001 Potrero Ave (Zuckerberg San Francisco General Hospital) on the right"
+        ]
+      },
+      "emergency_status": {
+        "available": true,
+        "wait_time_minutes": 18,
+        "services": [
+          "24/7 Emergency Department",
+          "Level I Trauma Center",
+          "Cardiac Care",
+          "Heart Attack Response Team",
+          "Cardiac Monitoring",
+          "Catheterization Lab"
+        ]
+      }
+    },
+    "metadata": {
+      "agent_name": "Location & Routing Agent",
+      "timestamp": "2024-06-17T21:00:00Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"nearest_facility\": {\n      \"name\": \"Zuckerberg San Francisco General Hospital and Trauma Center\",\n      \"address\": \"1001 Potrero Ave, San Francisco, CA 94110\",\n      \"phone\": \"(628) 206-8000\",\n      \"latitude\": 37.7557,\n      \"longitude\": -122.4044,\n      \"facility_type\": \"Emergency Room\"\n    },\n    \"route\": {\n      \"distance_miles\": 2.3,\n      \"eta_minutes\": 10,\n      \"traffic_status\": \"moderate\",\n      \"polyline\": \"svmzFpphjVn@_FpAiEvDqBtBkBzB{@pHiElJkGxJcF`Be@b@eBbEgDnAq@vDoAbG_A`I\",\n      \"directions\": [\n        \"Head southeast on Van Ness Ave toward Grove St\",\n        \"Turn left onto Grove St\",\n        \"Turn right onto 10th St\",\n        \"Continue onto Potrero Ave\",\n        \"Arrive at 1001 Potrero Ave (Zuckerberg San Francisco General Hospital) on the right\"\n      ]\n    },\n    \"emergency_status\": {\n      \"available\": true,\n      \"wait_time_minutes\": 18,\n      \"services\": [\"24/7 Emergency Department\", \"Level I Trauma Center\", \"Cardiac Care\", \"Heart Attack Response Team\", \"Cardiac Monitoring\", \"Catheterization Lab\"]\n    }\n  },\n  \"metadata\": {\n    \"agent_name\": \"Location & Routing Agent\",\n    \"timestamp\": \"2024-06-17T21:00:00Z\"\n  }\n}"
+}

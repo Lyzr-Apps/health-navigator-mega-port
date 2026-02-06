@@ -1,0 +1,103 @@
+{
+  "agent_name": "Video Escalation Agent",
+  "agent_id": "698598fa1caa4e686dd66f97",
+  "agent_purpose": "video_escalation",
+  "description": "Creates secure video consultation sessions with role-based access",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "video_session": {
+        "room_id": "string",
+        "room_name": "string",
+        "patient_token": "string",
+        "doctor_token": "string",
+        "expires_at": "string",
+        "max_participants": "number"
+      },
+      "session_config": {
+        "recording_enabled": "boolean",
+        "encryption_enabled": "boolean",
+        "max_duration_minutes": "number"
+      },
+      "session_metadata": {
+        "urgency_level": "string",
+        "session_type": "string",
+        "created_at": "string"
+      },
+      "join_urls": {
+        "patient_url": "string",
+        "doctor_url": "string"
+      }
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "video_session": {
+        "room_id": "vidroom_e1a2bf04b7",
+        "room_name": "consult_P12345_D67890_20240612T113000Z",
+        "patient_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.patient.vidroom_e1a2bf04b7.tenmin",
+        "doctor_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.doctor.vidroom_e1a2bf04b7.tenmin",
+        "expires_at": "2024-06-12T11:40:00Z",
+        "max_participants": 2
+      },
+      "session_config": {
+        "recording_enabled": true,
+        "encryption_enabled": true,
+        "max_duration_minutes": 30
+      },
+      "session_metadata": {
+        "urgency_level": "Moderate",
+        "session_type": "consultation",
+        "created_at": "2024-06-12T11:30:00Z"
+      },
+      "join_urls": {
+        "patient_url": "https://video.healthsecure.com/join/vidroom_e1a2bf04b7?role=patient&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.patient.vidroom_e1a2bf04b7.tenmin",
+        "doctor_url": "https://video.healthsecure.com/join/vidroom_e1a2bf04b7?role=doctor&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.doctor.vidroom_e1a2bf04b7.tenmin"
+      }
+    },
+    "metadata": {
+      "agent_name": "Video Escalation Agent",
+      "timestamp": "2024-06-12T11:30:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T07:35:25.138792",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "video_session": {
+        "room_id": "vidroom_e1a2bf04b7",
+        "room_name": "consult_P12345_D67890_20240612T113000Z",
+        "patient_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.patient.vidroom_e1a2bf04b7.tenmin",
+        "doctor_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.doctor.vidroom_e1a2bf04b7.tenmin",
+        "expires_at": "2024-06-12T11:40:00Z",
+        "max_participants": 2
+      },
+      "session_config": {
+        "recording_enabled": true,
+        "encryption_enabled": true,
+        "max_duration_minutes": 30
+      },
+      "session_metadata": {
+        "urgency_level": "Moderate",
+        "session_type": "consultation",
+        "created_at": "2024-06-12T11:30:00Z"
+      },
+      "join_urls": {
+        "patient_url": "https://video.healthsecure.com/join/vidroom_e1a2bf04b7?role=patient&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.patient.vidroom_e1a2bf04b7.tenmin",
+        "doctor_url": "https://video.healthsecure.com/join/vidroom_e1a2bf04b7?role=doctor&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.doctor.vidroom_e1a2bf04b7.tenmin"
+      }
+    },
+    "metadata": {
+      "agent_name": "Video Escalation Agent",
+      "timestamp": "2024-06-12T11:30:00Z"
+    }
+  },
+  "test_passed": true
+}

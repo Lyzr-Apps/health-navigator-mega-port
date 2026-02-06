@@ -1,0 +1,139 @@
+{
+  "workflow_name": "HealthNavigator AI Triage System",
+  "version": "1.0.0",
+  "description": "Complete symptom triage system with manager-orchestrated workflow and independent service agents",
+  "nodes": [
+    {
+      "id": "input_node",
+      "type": "Input",
+      "label": "User Input",
+      "nodeCategory": "input",
+      "position": {
+        "x": 100,
+        "y": 300
+      }
+    },
+    {
+      "id": "triage_manager",
+      "type": "Agent",
+      "label": "Triage Coordinator Manager",
+      "nodeCategory": "agent",
+      "agent_id": "698598b0a791e6e318b8df94",
+      "position": {
+        "x": 350,
+        "y": 300
+      }
+    },
+    {
+      "id": "symptom_extraction",
+      "type": "Agent",
+      "label": "Symptom Extraction Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69859858f7f7d3ffa5d86586",
+      "position": {
+        "x": 250,
+        "y": 500
+      }
+    },
+    {
+      "id": "red_flag_detection",
+      "type": "Agent",
+      "label": "Red Flag Detection Agent",
+      "nodeCategory": "agent",
+      "agent_id": "6985986be17e33c11eed1aad",
+      "position": {
+        "x": 400,
+        "y": 500
+      }
+    },
+    {
+      "id": "risk_scoring",
+      "type": "Agent",
+      "label": "Risk Scoring Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69859880fe576c19864be912",
+      "position": {
+        "x": 550,
+        "y": 500
+      }
+    },
+    {
+      "id": "action_planning",
+      "type": "Agent",
+      "label": "Action Planning Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69859894fe576c19864be913",
+      "position": {
+        "x": 700,
+        "y": 500
+      }
+    },
+    {
+      "id": "location_routing",
+      "type": "Agent",
+      "label": "Location & Routing Agent",
+      "nodeCategory": "agent",
+      "agent_id": "698598e3fe576c19864be921",
+      "position": {
+        "x": 650,
+        "y": 300
+      }
+    },
+    {
+      "id": "video_escalation",
+      "type": "Agent",
+      "label": "Video Escalation Agent",
+      "nodeCategory": "agent",
+      "agent_id": "698598fa1caa4e686dd66f97",
+      "position": {
+        "x": 850,
+        "y": 300
+      }
+    },
+    {
+      "id": "app_assistant",
+      "type": "Agent",
+      "label": "App Assistant Chatbot",
+      "nodeCategory": "agent",
+      "agent_id": "69859914e17e33c11eed1ab6",
+      "position": {
+        "x": 1050,
+        "y": 300
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "input_node",
+      "target": "triage_manager",
+      "label": "Symptom Input"
+    },
+    {
+      "source": "triage_manager",
+      "target": "symptom_extraction",
+      "label": "Extract Symptoms"
+    },
+    {
+      "source": "triage_manager",
+      "target": "red_flag_detection",
+      "label": "Detect Red Flags"
+    },
+    {
+      "source": "triage_manager",
+      "target": "risk_scoring",
+      "label": "Calculate Risk"
+    },
+    {
+      "source": "triage_manager",
+      "target": "action_planning",
+      "label": "Plan Actions"
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-02-06T00:00:00.000Z",
+    "total_agents": 8,
+    "manager_agents": 1,
+    "sub_agents": 4,
+    "independent_agents": 3
+  }
+}

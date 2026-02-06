@@ -1,0 +1,70 @@
+{
+  "agent_name": "Triage Coordinator Manager",
+  "agent_id": "698598b0a791e6e318b8df94",
+  "test_message": "I'm a 45-year-old male with diabetes. I've been having severe chest pain and sweating for the past 30 minutes. Pain level is 8/10.",
+  "expected_purpose": "manager",
+  "timestamp": "2026-02-06T07:34:45.575125",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "triage_summary": {
+        "urgency_level": "High",
+        "risk_score": 100,
+        "specialist_type": "Cardiology",
+        "red_flags_present": true
+      },
+      "symptom_analysis": {
+        "primary_complaint": "severe chest pain",
+        "structured_symptoms": [
+          {
+            "name": "chest pain",
+            "category": "pain",
+            "body_system": "cardiovascular",
+            "severity": "severe",
+            "onset": "sudden",
+            "duration": "30 minutes"
+          },
+          {
+            "name": "sweating",
+            "category": "autonomic",
+            "body_system": "cardiovascular",
+            "severity": "moderate",
+            "onset": "sudden",
+            "duration": "30 minutes"
+          }
+        ],
+        "critical_patterns": [
+          "chest pain + sweating",
+          "severe, sudden chest pain lasting >20 min"
+        ]
+      },
+      "recommendations": {
+        "primary_action": "IMMEDIATE: Call emergency services or go to the nearest emergency room without delay.",
+        "action_steps": [
+          "Dial emergency medical services (e.g., 911) now for immediate transport to the hospital.",
+          "Do not drive yourself; wait for EMS to arrive.",
+          "Keep patient seated or lying down while awaiting emergency services.",
+          "Inform EMS about diabetes and cardiovascular risk.",
+          "Prepare a list of current medications and allergies for emergency personnel.",
+          "If patient becomes unresponsive, stops breathing, or develops new symptoms such as confusion or fainting, start CPR if trained and continue until help arrives."
+        ],
+        "show_emergency_map": true,
+        "show_video_consult": true
+      },
+      "disclaimer": "This is preliminary triage guidance and NOT a diagnosis. Severe chest pain with sweating in a diabetic patient may indicate a heart attack (acute coronary syndrome). You must call emergency services now (such as 911) or go to the nearest emergency room IMMEDIATELY. Do not delay or attempt self-treatment. If symptoms worsen (e.g., loss of consciousness, difficulty breathing), begin CPR if trained. Always seek professional medical attention."
+    },
+    "metadata": {
+      "agent_name": "Triage Coordinator Manager",
+      "timestamp": "2024-06-15T13:30:00Z",
+      "sub_agents_consulted": [
+        "symptom_extraction",
+        "red_flag_detection",
+        "risk_scoring",
+        "action_planning"
+      ]
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"triage_summary\": {\n      \"urgency_level\": \"High\",\n      \"risk_score\": 100,\n      \"specialist_type\": \"Cardiology\",\n      \"red_flags_present\": true\n    },\n    \"symptom_analysis\": {\n      \"primary_complaint\": \"severe chest pain\",\n      \"structured_symptoms\": [\n        {\n          \"name\": \"chest pain\",\n          \"category\": \"pain\",\n          \"body_system\": \"cardiovascular\",\n          \"severity\": \"severe\",\n          \"onset\": \"sudden\",\n          \"duration\": \"30 minutes\"\n        },\n        {\n          \"name\": \"sweating\",\n          \"category\": \"autonomic\",\n          \"body_system\": \"cardiovascular\",\n          \"severity\": \"moderate\",\n          \"onset\": \"sudden\",\n          \"duration\": \"30 minutes\"\n        }\n      ],\n      \"critical_patterns\": [\n        \"chest pain + sweating\",\n        \"severe, sudden chest pain lasting >20 min\"\n      ]\n    },\n    \"recommendations\": {\n      \"primary_action\": \"IMMEDIATE: Call emergency services or go to the nearest emergency room without delay.\",\n      \"action_steps\": [\n        \"Dial emergency medical services (e.g., 911) now for immediate transport to the hospital.\",\n        \"Do not drive yourself; wait for EMS to arrive.\",\n        \"Keep patient seated or lying down while awaiting emergency services.\",\n        \"Inform EMS about diabetes and cardiovascular risk.\",\n        \"Prepare a list of current medications and allergies for emergency personnel.\",\n        \"If patient becomes unresponsive, stops breathing, or develops new symptoms such as confusion or fainting, start CPR if trained and continue until help arrives.\"\n      ],\n      \"show_emergency_map\": true,\n      \"show_video_consult\": true\n    },\n    \"disclaimer\": \"This is preliminary triage guidance and NOT a diagnosis. Severe chest pain with sweating in a diabetic patient may indicate a heart attack (acute coronary syndrome). You must call emergency services now (such as 911) or go to the nearest emergency room IMMEDIATELY. Do not delay or attempt self-treatment. If symptoms worsen (e.g., loss of consciousness, difficulty breathing), begin CPR if trained. Always seek professional medical attention.\"\n  },\n  \"metadata\": {\n    \"agent_name\": \"Triage Coordinator Manager\",\n    \"timestamp\": \"2024-06-15T13:30:00Z\",\n    \"sub_agents_consulted\": [\n      \"symptom_extraction\",\n      \"red_flag_detection\",\n      \"risk_scoring\",\n      \"action_planning\"\n    ]\n  }\n}"
+}

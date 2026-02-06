@@ -1,0 +1,79 @@
+{
+  "agent_name": "Risk Scoring Agent",
+  "agent_id": "69859880fe576c19864be912",
+  "agent_purpose": "risk_scoring",
+  "description": "Calculates comprehensive risk scores and urgency levels based on patient factors",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "risk_score": "number",
+      "urgency_level": "string",
+      "specialist_type": "string",
+      "risk_factors": [
+        "string"
+      ],
+      "score_breakdown": {
+        "age_score": "number",
+        "severity_score": "number",
+        "duration_score": "number",
+        "comorbidity_score": "number"
+      }
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "risk_score": 50,
+      "urgency_level": "Moderate",
+      "specialist_type": "Cardiology",
+      "risk_factors": [
+        "Age: 62",
+        "Symptom severity: moderate chest discomfort (5/10)",
+        "Duration: 2 hours",
+        "Comorbidity: hypertension"
+      ],
+      "score_breakdown": {
+        "age_score": 0,
+        "severity_score": 25,
+        "duration_score": 5,
+        "comorbidity_score": 20
+      }
+    },
+    "metadata": {
+      "agent_name": "Risk Scoring Agent",
+      "timestamp": "2024-07-12T10:01:22Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T07:35:06.401398",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "risk_score": 50,
+      "urgency_level": "Moderate",
+      "specialist_type": "Cardiology",
+      "risk_factors": [
+        "Age: 62",
+        "Symptom severity: moderate chest discomfort (5/10)",
+        "Duration: 2 hours",
+        "Comorbidity: hypertension"
+      ],
+      "score_breakdown": {
+        "age_score": 0,
+        "severity_score": 25,
+        "duration_score": 5,
+        "comorbidity_score": 20
+      }
+    },
+    "metadata": {
+      "agent_name": "Risk Scoring Agent",
+      "timestamp": "2024-07-12T10:01:22Z"
+    }
+  },
+  "test_passed": true
+}

@@ -146,16 +146,51 @@ export async function POST(request: NextRequest) {
       payload.assets = assets
     }
 
-    const response = await fetch(LYZR_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': LYZR_API_KEY,
-      },
-      body: JSON.stringify(payload),
-    })
+    // Retry logic for rate limiting (429 errors)
+    let response: Response
+    let rawText: string
+    let retries = 3
+    let delay = 1000 // Start with 1 second
 
-    const rawText = await response.text()
+    while (retries > 0) {
+      response = await fetch(LYZR_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': LYZR_API_KEY,
+        },
+        body: JSON.stringify(payload),
+      })
+
+      rawText = await response.text()
+
+      // If not rate limited, break out of retry loop
+      if (response.status !== 429) {
+        break
+      }
+
+      // If rate limited and retries remain, wait and retry
+      if (retries > 1) {
+        await new Promise((resolve) => setTimeout(resolve, delay))
+        delay *= 2 // Exponential backoff
+        retries--
+      } else {
+        // Last retry failed, return error
+        return NextResponse.json(
+          {
+            success: false,
+            response: {
+              status: 'error',
+              result: {},
+              message: 'API rate limit exceeded. Please try again in a few moments.',
+            },
+            error: 'Rate limit exceeded after retries',
+            details: rawText,
+          },
+          { status: 429 }
+        )
+      }
+    }
 
     if (response.ok) {
       const parsed = parseLLMJson(rawText)
