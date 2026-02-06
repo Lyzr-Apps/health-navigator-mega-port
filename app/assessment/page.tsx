@@ -42,6 +42,7 @@ export default function AssessmentPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [retryCountdown, setRetryCountdown] = useState<number>(0)
+  const [loadingMessage, setLoadingMessage] = useState<string>('Analyzing symptoms...')
   const [formData, setFormData] = useState<FormData>({
     age: '',
     gender: '',
@@ -77,6 +78,12 @@ export default function AssessmentPage() {
     }
 
     setLoading(true)
+    setLoadingMessage('Analyzing symptoms...')
+
+    // Update loading message after 10 seconds to show retry is happening
+    const messageTimer = setTimeout(() => {
+      setLoadingMessage('Processing your request (this may take up to 2 minutes)...')
+    }, 10000)
 
     try {
       // Build conditions list
@@ -107,9 +114,9 @@ Please analyze these symptoms and provide a triage assessment.`
         router.push('/results')
       } else {
         // Handle specific error types
-        if (result.error?.includes('rate limit') || result.error?.includes('429')) {
-          setError('Our system is experiencing high demand. Please wait a moment and try again.')
-          setRetryCountdown(60) // Start 60-second countdown
+        if (result.error?.includes('rate limit') || result.error?.includes('429') || result.error?.includes('high demand')) {
+          setError(result.response?.message || 'Service is experiencing very high demand. The system tried multiple times. Please wait and try again.')
+          setRetryCountdown(90) // Start 90-second countdown (longer to give API time to recover)
         } else {
           setError(result.error || 'Failed to analyze symptoms. Please try again.')
         }
@@ -118,7 +125,9 @@ Please analyze these symptoms and provide a triage assessment.`
       setError('An unexpected error occurred. Please try again.')
       console.error('Assessment error:', err)
     } finally {
+      clearTimeout(messageTimer)
       setLoading(false)
+      setLoadingMessage('Analyzing symptoms...')
     }
   }
 
@@ -328,10 +337,10 @@ Please analyze these symptoms and provide a triage assessment.`
                     </div>
                     <div className="flex-1">
                       <p className="text-red-700 font-medium">{error}</p>
-                      {(error.includes('high demand') || error.includes('rate limit')) && (
+                      {(error.includes('high demand') || error.includes('rate limit') || error.includes('tried')) && (
                         <div className="mt-2">
                           <p className="text-red-600 text-sm">
-                            The system automatically retried 5 times.
+                            The system automatically retried 9 times over 2+ minutes with increasing delays.
                           </p>
                           {retryCountdown > 0 ? (
                             <div className="flex items-center gap-2 mt-2">
@@ -360,10 +369,12 @@ Please analyze these symptoms and provide a triage assessment.`
                   className="flex-1 bg-[#0077B6] hover:bg-[#005F8D] text-white py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
-                    <>
-                      <FaSpinner className="animate-spin mr-2" />
-                      Analyzing Symptoms...
-                    </>
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="flex items-center gap-2">
+                        <FaSpinner className="animate-spin" />
+                        <span>{loadingMessage}</span>
+                      </div>
+                    </div>
                   ) : retryCountdown > 0 ? (
                     <>
                       <FaClock className="mr-2" />

@@ -4,6 +4,23 @@ import parseLLMJson from '@/lib/jsonParser'
 const LYZR_API_URL = 'https://agent-prod.studio.lyzr.ai/v3/inference/chat/'
 const LYZR_API_KEY = process.env.LYZR_API_KEY || ''
 
+// Request queue to prevent simultaneous API calls
+let lastRequestTime = 0
+const MIN_REQUEST_INTERVAL = 1500 // Minimum 1.5 seconds between requests
+
+async function waitForRateLimit() {
+  const now = Date.now()
+  const timeSinceLastRequest = now - lastRequestTime
+
+  if (timeSinceLastRequest < MIN_REQUEST_INTERVAL) {
+    const waitTime = MIN_REQUEST_INTERVAL - timeSinceLastRequest
+    console.log(`Rate limit protection: waiting ${waitTime}ms before next request`)
+    await new Promise(resolve => setTimeout(resolve, waitTime))
+  }
+
+  lastRequestTime = Date.now()
+}
+
 // Types
 interface NormalizedAgentResponse {
   status: 'success' | 'error'
@@ -146,12 +163,15 @@ export async function POST(request: NextRequest) {
       payload.assets = assets
     }
 
-    // Retry logic for rate limiting (429 errors)
+    // Wait for rate limit protection before first attempt
+    await waitForRateLimit()
+
+    // Aggressive retry logic for rate limiting (429 errors)
     let response: Response
     let rawText: string
-    let maxRetries = 5
+    let maxRetries = 8 // Increased to 8 retries
     let currentAttempt = 0
-    let delay = 2000 // Start with 2 seconds
+    let delay = 3000 // Start with 3 seconds
 
     while (currentAttempt <= maxRetries) {
       try {
@@ -175,7 +195,8 @@ export async function POST(request: NextRequest) {
         if (currentAttempt < maxRetries) {
           console.log(`Rate limited (429), retrying in ${delay}ms... (attempt ${currentAttempt + 1}/${maxRetries})`)
           await new Promise((resolve) => setTimeout(resolve, delay))
-          delay = Math.min(delay * 1.5, 10000) // Exponential backoff, max 10 seconds
+          // More aggressive exponential backoff: 3s, 4.5s, 6.75s, 10s, 15s, 20s, 30s, 45s
+          delay = Math.min(delay * 1.5, 45000) // Exponential backoff, max 45 seconds
           currentAttempt++
         } else {
           // Last retry failed, return error
@@ -185,10 +206,10 @@ export async function POST(request: NextRequest) {
               response: {
                 status: 'error',
                 result: {},
-                message: 'Service is currently experiencing high demand. Please wait 60 seconds and try again.',
+                message: 'Service is experiencing very high demand. The system tried 9 times over 2+ minutes. Please wait and try again.',
               },
               error: 'Rate limit exceeded after multiple retries',
-              details: `Attempted ${maxRetries + 1} times. Please try again later.`,
+              details: `Attempted ${maxRetries + 1} times with extended delays. The API may be temporarily overloaded.`,
             },
             { status: 429 }
           )
@@ -196,8 +217,9 @@ export async function POST(request: NextRequest) {
       } catch (fetchError) {
         // Network error during retry
         if (currentAttempt < maxRetries) {
+          console.log(`Network error during attempt ${currentAttempt + 1}, retrying...`)
           await new Promise((resolve) => setTimeout(resolve, delay))
-          delay = Math.min(delay * 1.5, 10000)
+          delay = Math.min(delay * 1.5, 45000)
           currentAttempt++
         } else {
           throw fetchError
